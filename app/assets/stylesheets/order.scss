@@ -3,15 +3,33 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .orders-index{
+  border: solid 1px;
+  margin-top: 200px;
   .main-block{
-    border:solid, 1px;
+    border: solid 1px;
     display: flex;
-    justify-content: space-around
-  }
+    justify-content: space-around;
+
+    .form{
+      border: dotted 1px;
+    }
+  
     .dashboard{
       display: flex;
       flex-direction: column;
-      border: solid, 1px;
+      border: solid 1px;
+
+      .orders-table{
+        .table{
+            overflow-y: auto;     
+            height: 100px;            
+            width: 200%;
+
+            th{
+              font-weight: bold;
+            }
+        }
+      }
     }
-  
+  }
 }

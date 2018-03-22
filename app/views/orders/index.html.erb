@@ -2,31 +2,67 @@
   <div class="container">
     <div class="main-block">
       <div class="form">
-        <h1>Fomr place</h1>
+        <%= form_for @order, remote:true do |f| %>
+          <div class= "form-group">
+            <%= f.label :vendor_name %>
+            <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: "Select a vendor"}, {class: "form-control"} %>
+          </div>
+          <div class="form-group">
+            <h5>modal</h5>
+            <%=  link_to "Create new vendor", vendors_path %>
+          </div>
+          <div class= "form-group">
+            <%= f.label :customer_name %>
+            <%= f.collection_select :customer_id, Customer.all, :id, :name, {prompt: "Select a customer"}, {class: "form-control"}%>
+          </div>
+          <div class="form-group">
+            <%=  link_to "Create new vendor", vendors_path%>
+          </div>
+          <div class= "form-group">
+            <%= f.label :shipping_address %>
+            <%= f.text_field :shipping_address, class:"form-control", placerholder:"Order number:"%>
+          </div>
+          <div class= "form-group">
+            <%= f.label :order_number %>
+            <%= f.text_field :order_number, class:"form-control", placerholder:"Order number:"%>
+          </div>
+          <div class= "form-group">
+            <%= f.label :tracking_number %>
+            <%= f.text_field :order_number, class:"form-control", placerholder:"Order number:"%>
+          </div>
+          
+          
+
+          <div class="form-group">
+            <%= f.submit "Create Order", class:"btn btn-primary"%>
+          </div>
+        <% end %>
       </div>
       <div class="dashboard">
         <div class="orders-table">
-         <table class="table">
+         <table class="table" style="border:solid,2px">
             <thead>
               <tr>
-                <td> Order Id </td>
-                <td> Vendor </td>
-                <td> Tracking number </td>
-                <td> Customer </td>
+                <th> Order id</td>
+                <th> Vendor </td>
+                <th> Tracking number </td>
+                <th> Customer </td>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td> 2</td>
-                <td> Target</td>
-                <td> 3231</td>
-                <td> Delyte</td>
-              </tr>
+              <% @orders.each do |order| %>
+                <tr>
+                  <td> <%= order.order_number %></td>
+                  <td> <%= order.vendor.name %></td>
+                  <td> <%= order.tracking_number %></td>
+                  <td> <%= order.customer.name %></td>
+                </tr>
+                <% end %>
             </tbody>
           </table>
         </div>
         <div class="map">
-          <h1>Map google maps</h1>
+          <h1>Map google maps rails</h1>
         </div>
       </div>
     </div>
