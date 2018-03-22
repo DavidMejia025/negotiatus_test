@@ -21,10 +21,16 @@
 
       .orders-table{
         .table{
-            overflow-y: auto;     
-            height: 100px;            
-            width: 200%;
-
+          tbody{
+            display:block;
+            height:200px;
+            overflow:auto;
+          }
+          thead, tbody tr {
+              display:table;
+              width:700px;
+              table-layout:fixed;
+          }
             th{
               font-weight: bold;
             }

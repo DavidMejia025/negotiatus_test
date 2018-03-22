@@ -41,24 +41,26 @@
       <div class="dashboard">
         <div class="orders-table">
          <table class="table" style="border:solid,2px">
-            <thead>
-              <tr>
-                <th> Order id</td>
-                <th> Vendor </td>
-                <th> Tracking number </td>
-                <th> Customer </td>
-              </tr>
-            </thead>
-            <tbody>
-              <% @orders.each do |order| %>
+              <thead class="thead">
                 <tr>
-                  <td> <%= order.order_number %></td>
-                  <td> <%= order.vendor.name %></td>
-                  <td> <%= order.tracking_number %></td>
-                  <td> <%= order.customer.name %></td>
+                  <th> Order id</td>
+                  <th> Order status</th>
+                  <th> Vendor </td>
+                  <th> Tracking number </td>
+                  <th> Customer </td>
                 </tr>
-                <% end %>
-            </tbody>
+              </thead>
+              <tbody>
+                <% @orders.each do |order| %>
+                  <tr>
+                    <td> <%= order.order_number %></td>
+                    <td> <%= order.status %></td>
+                    <td> <%= order.vendor.name %></td>
+                    <td> <%= order.tracking_number %></td>
+                    <td> <%= order.customer.name %></td>
+                  </tr>
+                  <% end %>
+              </tbody>
           </table>
         </div>
         <div class="map">

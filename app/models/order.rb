@@ -17,4 +17,10 @@
 class Order < ActiveRecord::Base
   belongs_to :vendor
   belongs_to :customer
+
+  def travel_time()
+    vendor_address = self.vendor.address
+    customer_address =  self.customer.address
+    
+  end
 end

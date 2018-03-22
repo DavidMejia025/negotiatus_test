@@ -1,9 +1,14 @@
 class OrdersController < ApplicationController
   def index
     @order = Order.new
-    @orders = Order.all.order("order_number ASC")
+    @orders = Order.where.not(status: "Delivered")
+    @orders = @orders.order("order_number ASC")
+     
   end
 
+  def show
+
+  end
   def create
   end
 
