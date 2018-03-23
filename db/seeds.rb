@@ -54,7 +54,6 @@ end
  high_customer_id = Customer.last.id
 
 
-
 3.times do
   vendor_i = Vendor.find(rand(low_vendor_id..high_vendor_id))
   customer_i = Customer.find(rand(low_customer_id..high_customer_id))
