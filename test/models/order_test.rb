@@ -12,6 +12,7 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  vendor_name      :string
+#  elapsed_time     :decimal(, )
 #
 
 require 'test_helper'
