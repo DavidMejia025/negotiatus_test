@@ -1,26 +1,80 @@
 // Place all the styles related to the Order controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+nav{
+  h1{
+   color:#eeeeee;
+  }
+  h4{
+    color:#50cea2;
+    margin-left:200px;
+    margin-top:20px;
+  }
+  button{
+    margin-top:50px;
+    background-color: #eeeeee;
+    border:solid 1px #50cea2;
+    border-radius:10px;
+    padding:10px;
+    margin:5px;
+
+
+  }
+}
 
 .orders-index{
-  border: solid 1px;
-  margin-top: 200px;
+  background-color: #f0f0f0;
+  
   .main-block{
-    border: solid 1px;
     display: flex;
     justify-content: space-around;
 
     .form{
+      margin-top:100px;
       border: dotted 1px;
+      border: solid #50cea2 1px;
+      padding:30px;
     }
   
     .dashboard{
+      margin-top:100px;
       display: flex;
       flex-direction: column;
-      border: solid 1px;
+      .info{
+        display:flex;
+        width:800px;
 
+        .stats{
+          margin-left:50px;
+          display:flex;
+          flex-wrap:wrap;
+          h4{
+            margin:10px;
+          }
+
+        }
+        form{
+          width:500px;
+          margin-top:35px;
+          margin-left:200px;
+        }  
+      }
+      
       .orders-table{
         .table{
+          border:solid #ABB2B9 1px;
+          .very-late{
+            border: 1px solid red;
+            background-color: #ffd6cc;
+          }
+
+          .not-normal{
+            border: 1px solid #ff751a;
+            background-color: #ffd1b3;
+          }
+          thead{
+            margin-left:50px;
+          }
           tbody{
             display:block;
             height:200px;
