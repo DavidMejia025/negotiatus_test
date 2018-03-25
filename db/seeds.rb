@@ -13,7 +13,7 @@ Order.destroy_all
 include OrdersHelper
 vendors = []
 customers = []
-1000.times do
+100.times do
   Vendor.create(name:Faker::Company.name,address:create_address)
   if(Vendor.last.latitude==nil) || (Vendor.last.longitude==nil)
     from_address_to_geo_location(Vendor.last)
@@ -23,7 +23,7 @@ end
  low_vendor_id = Vendor.first.id
  high_vendor_id = Vendor.last.id
 
-10.times do
+300.times do
   Customer.create(name:Faker::Company.name,address:create_address)
   if(Customer.last.latitude==nil) || (Customer.last.longitude==nil)
     from_address_to_geo_location(Customer.last)
