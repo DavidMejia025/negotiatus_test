@@ -12,4 +12,8 @@
 class Customer < ActiveRecord::Base
   has_many :orders
   has_many :vendors, through: :orders
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+  
+
 end

@@ -1,3 +1,15 @@
-alert("hola")
+<% unless @order.status == "Delivered" %> 
+  $(".table tbody").append('<tr><td><%= @order.order_number %></td><td><%= @order.status %><td><%= @order.vendor.name %></td> </td></td><td> <%= @order.tracking_number %></td><td><%= @order.customer.name %></td></tr>')
+    <% if @order.status == "Very late" %>
+      $(".table tbody").children().last().addClass("very-late")
+    <% elsif @order.status == "Not normal" %>
+      $(".table tbody").children().last().addClass("not-normal")
+    <% end %>
+<%end%>
 
-$(".table").append('<tr><td>'+ <%= @order.order_number %>+'</td></tr>')
+handler = Gmaps.build('Google');
+handler.buildMap({ provider: {}, internal: {id: 'usa_map'}}, function(){
+markers = handler.addMarkers(<%=raw @hash.to_json %>);
+handler.bounds.extendWith(markers);
+handler.fitMapToBounds();
+});

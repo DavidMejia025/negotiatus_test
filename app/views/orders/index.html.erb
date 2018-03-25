@@ -1,14 +1,14 @@
 <div class="orders-index">
-  <div class="container">
+  <div>
     <div class="main-block">
       <div class="form">
+        <h1>Place new order</h1>
         <%= form_for @order, remote:true do |f| %>
           <div class= "form-group">
             <%= f.label :vendor_name %>
             <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: "Select a vendor"}, {class: "form-control"} %>
           </div>
           <div class="form-group">
-            <h5>modal</h5>
             <%=  link_to "Create new vendor", vendors_path %>
           </div>
           <div class= "form-group">
@@ -30,41 +30,84 @@
             <%= f.label :tracking_number %>
             <%= f.text_field :tracking_number, class:"form-control", placerholder:"Order number:"%>
           </div>
-          
-          
-
           <div class="form-group">
             <%= f.submit "Create Order", class:"btn btn-primary"%>
           </div>
         <% end %>
       </div>
       <div class="dashboard">
+        <div class="info">
+          <div class="stats">
+            <h4 style="color: #00e600"> Delivered: <%=  Order.where(status: "Delivered").count%> </h4>
+            <h4 style="color:#0073e6"> Normal: <%= Order.where(status: "Normal").count %></h4>
+            <h4 style="color:#e65c00
+            "> Not normal: <%= Order.where(status: "Not normal").count %></h4>
+            <h4 style="color:#660000"> Very late: <%= Order.where(status: "Very late").count %></h4>
+          </div>
+          <form action="/orders" class="search-form">
+            <div class="form-group has-feedback">
+              <label for="search" class="sr-only">Search</label>
+              <input type="text" class="form-control" name="q" id="search-input" placeholder="Serch orders by status" value="<%= params[:q] %>">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </form>
+        </div>
+
         <div class="orders-table">
          <table class="table" style="border:solid,2px">
               <thead class="thead">
                 <tr>
-                  <th> Order id</td>
-                  <th> Order status</th>
-                  <th> Vendor </td>
-                  <th> Tracking number </td>
-                  <th> Customer </td>
+                  <th > Order id</td>
+                  <th > Order status</th>
+                  <th > Vendor </td>
+                  <th > Tracking number </td>
+                  <th > Customer </td>
                 </tr>
               </thead>
               <tbody>
                 <% @orders.each do |order| %>
-                  <tr>
-                    <td> <%= order.order_number %></td>
-                    <td> <%= order.status %></td>
-                    <td> <%= order.vendor.name %></td>
-                    <td> <%= order.tracking_number %></td>
-                    <td> <%= order.customer.name %></td>
+                <% if order.status == "Very late"%>
+                  <tr class="very-late">
+                    <td class="text-center"> <%= order.order_number %></td>
+                    <td class="text-center"> <%= order.status %></td>
+                    <td class="text-center"> <%= order.vendor.name %></td>
+                    <td class="text-center"> <%= order.tracking_number %></td>
+                    <td class="text-center"> <%= order.customer.name %></td>
                   </tr>
+                  <% elsif order.status=="Not normal"%>
+                    <tr class="not-normal">
+                      <td class="text-center"> <%= order.order_number %></td>
+                      <td class="text-center"> <%= order.status %></td>
+                      <td class="text-center"> <%= order.vendor.name %></td>
+                      <td class="text-center"> <%= order.tracking_number %></td>
+                      <td class="text-center"> <%= order.customer.name %></td>
+                    </tr>
+                    <% else %>
+                      <tr >
+                      <td class="text-center"> <%= order.order_number %></td>
+                      <td class="text-center"> <%= order.status %></td>
+                      <td class="text-center"> <%= order.vendor.name %></td>
+                      <td class="text-center"> <%= order.tracking_number %></td>
+                      <td class="text-center"> <%= order.customer.name %></td>
+                    </tr>
+                    <% end %>
                   <% end %>
               </tbody>
           </table>
         </div>    
         <div class="map">
-          <h1>Map google maps rails</h1>
+          <div style='width: 800px;'>
+            <div id="usa_map" style='width: 800px; height: 400px;'></div>
+          </div>
+
+          <script type="text/javascript">
+            handler = Gmaps.build('Google');
+            handler.buildMap({ provider: {}, internal: {id: 'usa_map'}}, function(){
+              markers = handler.addMarkers(<%=raw @hash.to_json %>);
+              handler.bounds.extendWith(markers);
+              handler.fitMapToBounds();
+            });
+          </script>
         </div>
       </div>
     </div>
