@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180324205756) do
+ActiveRecord::Schema.define(version: 20180326144008) do
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -27,12 +27,14 @@ ActiveRecord::Schema.define(version: 20180324205756) do
     t.integer  "customer_id"
     t.integer  "order_number"
     t.integer  "tracking_number"
-    t.string   "shipping_address"
+    t.string   "address"
     t.string   "status"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "vendor_name"
     t.decimal  "elapsed_time"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"

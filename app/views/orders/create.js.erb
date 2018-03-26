@@ -7,6 +7,12 @@
     <% end %>
 <%end%>
 
+ $(".stats h4.D").text("Delivered:"+ "<%= Order.where(status: 'Delivered').count %>")
+ $(".stats h4.N").text("Normal:"+ "<%= Order.where(status: 'Normal').count %>")
+ $(".stats h4.N-n").text("Not normal:"+ "<%= Order.where(status: 'Not normal').count %>")            
+ $(".stats h4.V-l").text("Very late:"+ "<%= Order.where(status: 'Very late').count %>")
+          
+
 handler = Gmaps.build('Google');
 handler.buildMap({ provider: {}, internal: {id: 'usa_map'}}, function(){
 markers = handler.addMarkers(<%=raw @hash.to_json %>);

@@ -16,11 +16,13 @@
             <%= f.collection_select :customer_id, Customer.all, :id, :name, {prompt: "Select a customer"}, {class: "form-control"}%>
           </div>
           <div class="form-group">
-            <%=  link_to "Create new vendor", vendors_path%>
+            <%=  link_to "Create new customer", vendors_path%>
           </div>
           <div class= "form-group">
-            <%= f.label :shipping_address %>
-            <%= f.text_field :shipping_address, class:"form-control", placerholder:"Order number:"%>
+            <%= f.label :address %>
+            <%= f.text_field :address, class:"form-control", placerholder:"Order number:"%>
+            <%= content_tag :div, class: "customers_information", data: {datas: Customer.all} do %>
+            <% end %>
           </div>
           <div class= "form-group">
             <%= f.label :order_number %>
@@ -38,11 +40,11 @@
       <div class="dashboard">
         <div class="info">
           <div class="stats">
-            <h4 style="color: #00e600"> Delivered: <%=  Order.where(status: "Delivered").count%> </h4>
-            <h4 style="color:#0073e6"> Normal: <%= Order.where(status: "Normal").count %></h4>
-            <h4 style="color:#e65c00
+            <h4 class="D" style="color: #00e600"> Delivered: <%=  Order.where(status: "Delivered").count%> </h4>
+            <h4 class="N" style="color:#0073e6"> Normal: <%= Order.where(status: "Normal").count %></h4>
+            <h4 class="N-n" style="color:#e65c00
             "> Not normal: <%= Order.where(status: "Not normal").count %></h4>
-            <h4 style="color:#660000"> Very late: <%= Order.where(status: "Very late").count %></h4>
+            <h4 class="V-l" style="color:#660000"> Very late: <%= Order.where(status: "Very late").count %></h4>
           </div>
           <form action="/orders" class="search-form">
             <div class="form-group has-feedback">
